@@ -1,6 +1,18 @@
 #!/bin/bash
+##
+#
+# Variables
+# TZ - Setup local timezone
+# GAME_PATH - Root game path
+#
+##
 
-cd /home/container
+if [ -z ${GAME_PATH} ];
+then
+    export GAME_PATH=/home/container;
+fi
+
+cd "$GAME_PATH"
 
 sleep 1
 
@@ -22,7 +34,7 @@ fi
 
 # Replace Startup Variables
 MODIFIED_STARTUP=`eval echo $(echo ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')`
-echo ":/home/container$ ${MODIFIED_STARTUP}"
+echo ":$GAME_PATH$ ${MODIFIED_STARTUP}"
 
 # Run the Server
 eval ${MODIFIED_STARTUP}
