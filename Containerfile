@@ -20,7 +20,14 @@ RUN dpkg --add-architecture i386 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /var/log/*
 
+RUN mkdir -p /steamcmd \
+    && curl -sSL -o /tmp/steamcmd.tar.gz https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz \
+    && tar -xzvf /tmp/steamcmd.tar.gz -C /steamcmd \
+    && rm -rf /tmp/*
+
 RUN useradd -m -d /home/container container
+
+RUN chown container:container -R /steamcmd
 
 USER container
 
