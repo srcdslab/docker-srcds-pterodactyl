@@ -31,18 +31,18 @@ sleep 1
 # Make internal Docker IP address available to processes.
 export INTERNAL_IP=`ip route get 1 | awk '{print $NF;exit}'`
 
-# Update Source Server
-if [ ! -z ${SRCDS_APPID} ]; then
-    if [ ! -z ${SRCDS_BETAID} ]; then
-        if [ ! -z ${SRCDS_BETAPASS} ]; then
-            $STEAMCMD_PATH/./steamcmd.sh +login anonymous +force_install_dir "$GAME_PATH" +app_update ${SRCDS_APPID} -beta ${SRCDS_BETAID} -betapassword ${SRCDS_BETAPASS} +quit
-        else
-            $STEAMCMD_PATH/./steamcmd.sh +login anonymous +force_install_dir "$GAME_PATH" +app_update ${SRCDS_APPID} -beta ${SRCDS_BETAID} +quit
-        fi
-    else
-        $STEAMCMD_PATH/./steamcmd.sh +login anonymous +force_install_dir "$GAME_PATH" +app_update ${SRCDS_APPID} +quit
-    fi
-fi
+# Disable Update Source Server
+#if [ ! -z ${SRCDS_APPID} ]; then
+#    if [ ! -z ${SRCDS_BETAID} ]; then
+#        if [ ! -z ${SRCDS_BETAPASS} ]; then
+#            $STEAMCMD_PATH/./steamcmd.sh +login anonymous +force_install_dir "$GAME_PATH" +app_update ${SRCDS_APPID} -beta ${SRCDS_BETAID} -betapassword ${SRCDS_BETAPASS} +quit
+#        else
+#            $STEAMCMD_PATH/./steamcmd.sh +login anonymous +force_install_dir "$GAME_PATH" +app_update ${SRCDS_APPID} -beta ${SRCDS_BETAID} +quit
+#        fi
+#    else
+#        $STEAMCMD_PATH/./steamcmd.sh +login anonymous +force_install_dir "$GAME_PATH" +app_update ${SRCDS_APPID} +quit
+#    fi
+#fi
 
 if [ "$USE_SYS_LIBS" = "true" ]; then
     rm "${GAME_PATH}/bin/libstdc++.so.6" | true
