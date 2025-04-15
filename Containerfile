@@ -1,6 +1,6 @@
-FROM ubuntu:20.04 as production
+FROM ubuntu:24.04 as production
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN dpkg --add-architecture i386 \
     && apt-get update -q \
@@ -10,11 +10,11 @@ RUN dpkg --add-architecture i386 \
         curl \
         g++-multilib \
         iproute2 \
-        lib32stdc++-7-dev \
+        lib32stdc++-13-dev \
         lib32z1-dev \
         libc6-dev-i386 \
         linux-libc-dev:i386 \
-        libncurses5:i386 \
+        libncurses6:i386 \
         tzdata \
     && update-ca-certificates \
     && apt-get clean \
@@ -31,7 +31,7 @@ RUN chown container:container -R /steamcmd
 
 USER container
 
-ENV HOME /home/container
+ENV HOME=/home/container
 
 WORKDIR /home/container
 
